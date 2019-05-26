@@ -85,7 +85,7 @@ Sin embargo, esto no es suficiente para solo etiquetar ingredientes y terminarem
 Die Eier hart kochen. Dann pellen und mit einem Eierschneider in Scheiben schneiden. Den Reis halbgar kochen und zur Seite stellen. Die Wurst (Kolbász) in dünne Scheiben schneiden.Den Knoblauch abziehen und fein würfeln. Die Zwiebel schälen, fein hacken und in etwas Fett glasig braten. Knoblauch und Hackfleisch dazu geben und so lange braten, bis das Hackfleisch schön krümelig wird. Den eigenen Saft nicht ganz verkochen lassen. Die Fleischmasse mit Salz, Pfeffer und Paprikapulver würzen.Das Sauerkraut kurz durchspülen, ausdrücken und abtropfen lassen (damit es nicht zu sauer wird). Das Sauerkraut in einen Topf geben und mit dem Kümmel und den Lorbeerblättern vermischen. Ca. 30 Minuten unter Zugabe von wenig Wasser bei niedriger Stufe dünsten.
 ```
 <div style="text-align: justify">
-Y esto cambia en el listado de ingredientes por el contrario, se vuelve más notorio
+Y esto no cambia en el listado de ingredientes, por el contrario, se vuelve más notorio
 </div>
 ```
 ['600 g Hackfleisch, halb und halb',

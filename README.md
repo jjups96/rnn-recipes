@@ -26,12 +26,15 @@ Después de una tokenización, y obtención del vocabulario de recetas, pasamos 
 Una receta se guarda en un arreglo de cadenas, al concatener dichas cadenas obtenemos un parrafo. 
 </div>
 ```
+
 1. Place the stock, lentils, celery, carrot, thyme, and salt in a medium saucepan and bring to a boil. Reduce heat to low and simmer until the lentils are tender, about 30 minutes, depending on the lentils. (If they begin to dry out, add water as needed.) Remove and discard the thyme. Drain and transfer the mixture to a bowl; let cool. 2. Fold in the tomato, apple, lemon juice, and olive oil. Season with the pepper. 3. To assemble a wrap, place 1 lavash sheet on a clean work surface. Spread some of the lentil mixture on the end nearest you, leaving a 1-inch border. Top with several slices of turkey, then some of the lettuce. Roll up the lavash, slice crosswise, and serve. If using tortillas, spread the lentils in the center, top with the turkey and lettuce, and fold up the bottom, left side, and right side before rolling away from you.
+
 ```
 <div style="text-align: justify">
 Nuestros datos no están etiquetados, pero podemos obtener algunos de los ingredientes que se mencionan en la receta usando el listado de ingredientes que acompañan a la receta.
 </div>
 ```
+
 ['4 cups low-sodium vegetable or chicken stock',
  '1 cup dried brown lentils',
  '1/2 cup dried French green lentils',
@@ -47,20 +50,24 @@ Nuestros datos no están etiquetados, pero podemos obtener algunos de los ingred
  '3 sheets whole-wheat lavash, cut in half crosswise, or 6 (12-inch) flour tortillas',
  '3/4 pound turkey breast, thinly sliced',
  '1/2 head Bibb lettuce']
+ 
 ```
 <div style="text-align: justify">
 Primero limpiamos el texto de caracteres no deseado.
 </div>
 ```python
+
 def _clean(text):
     text = text.replace("(", "")
     text = text.split("/")[0]
     return text
+    
 ```
 <div style="text-align: justify">
 Para después tokenizar la lista de ingredientes y después filtrar las palabras que nos interesan, como los números y las stop words.
 </div>
 ```python
+
 def _filter(token):
     if len(token) < 2:
         return False
@@ -71,6 +78,7 @@ def _filter(token):
     if token.like_num:
         return False
     return True
+    
 ```
 <div style="text-align: justify">
  

@@ -25,14 +25,17 @@ Después de una tokenización, y obtención del vocabulario de recetas, pasamos 
 <div style="text-align: justify">
 Una receta se guarda en un arreglo de cadenas, al concatener dichas cadenas obtenemos un parrafo. 
 </div>
+
 ```
 
 1. Place the stock, lentils, celery, carrot, thyme, and salt in a medium saucepan and bring to a boil. Reduce heat to low and simmer until the lentils are tender, about 30 minutes, depending on the lentils. (If they begin to dry out, add water as needed.) Remove and discard the thyme. Drain and transfer the mixture to a bowl; let cool. 2. Fold in the tomato, apple, lemon juice, and olive oil. Season with the pepper. 3. To assemble a wrap, place 1 lavash sheet on a clean work surface. Spread some of the lentil mixture on the end nearest you, leaving a 1-inch border. Top with several slices of turkey, then some of the lettuce. Roll up the lavash, slice crosswise, and serve. If using tortillas, spread the lentils in the center, top with the turkey and lettuce, and fold up the bottom, left side, and right side before rolling away from you.
 
 ```
+
 <div style="text-align: justify">
 Nuestros datos no están etiquetados, pero podemos obtener algunos de los ingredientes que se mencionan en la receta usando el listado de ingredientes que acompañan a la receta.
 </div>
+
 ```
 
 ['4 cups low-sodium vegetable or chicken stock',
@@ -52,9 +55,11 @@ Nuestros datos no están etiquetados, pero podemos obtener algunos de los ingred
  '1/2 head Bibb lettuce']
  
 ```
+
 <div style="text-align: justify">
 Primero limpiamos el texto de caracteres no deseado.
 </div>
+
 ```python
 
 def _clean(text):
@@ -63,9 +68,13 @@ def _clean(text):
     return text
     
 ```
+
 <div style="text-align: justify">
+ 
 Para después tokenizar la lista de ingredientes y después filtrar las palabras que nos interesan, como los números y las stop words.
+ 
 </div>
+
 ```python
 
 def _filter(token):
@@ -85,17 +94,29 @@ def _filter(token):
 Sin embargo, esto no es suficiente para solo etiquetar ingredientes y terminaremos etiquetando el lenguaje de cocina. Por ejemplo, nuestro filtro no hace distinción entre las palabras **pound, turkey, breast, thinly, sliced**, por lo que al momento de etiquetar la receta tomará la sentencia: Top with several **slices** of **turkey**, then some of the **lettuce**. En lugar del deseado: Top with several slices of **turkey**, then some of the **lettuce**
 
 </div>
+
 ### *1 gut gekennzeichnetes und gefiltertes Arrangement.
+
 <div style="text-align: justify">
+ 
 *Con acento alemán*-Sin embargo este problema se ve eliminado si resolvemos el mismo problema, pero en alemán. Aunque no sepamos alemán, y parezca un lenguaje más complicado gramaticalmente que el inglés, esta es una ventaja para nosotros. A simple vista podemos detectar que en el alemán se hace uso de las letras mayúsculas cuando se inicia una oración y para denotar al sustantivo/sujeto de una oración.
+
 </div>
+
 ```
+
 Die Eier hart kochen. Dann pellen und mit einem Eierschneider in Scheiben schneiden. Den Reis halbgar kochen und zur Seite stellen. Die Wurst (Kolbász) in dünne Scheiben schneiden.Den Knoblauch abziehen und fein würfeln. Die Zwiebel schälen, fein hacken und in etwas Fett glasig braten. Knoblauch und Hackfleisch dazu geben und so lange braten, bis das Hackfleisch schön krümelig wird. Den eigenen Saft nicht ganz verkochen lassen. Die Fleischmasse mit Salz, Pfeffer und Paprikapulver würzen.Das Sauerkraut kurz durchspülen, ausdrücken und abtropfen lassen (damit es nicht zu sauer wird). Das Sauerkraut in einen Topf geben und mit dem Kümmel und den Lorbeerblättern vermischen. Ca. 30 Minuten unter Zugabe von wenig Wasser bei niedriger Stufe dünsten.
+
 ```
+
 <div style="text-align: justify">
+ 
 Y esto no cambia en el listado de ingredientes, por el contrario, se vuelve más notorio
+
 </div>
+
 ```
+
 ['600 g Hackfleisch, halb und halb',
  '800 g Sauerkraut',
  '200 g Wurst, geräucherte (Csabai Kolbász)',
@@ -111,13 +132,17 @@ Y esto no cambia en el listado de ingredientes, por el contrario, se vuelve más
  'Paprikapulver',
  'etwas Wasser',
  'Öl']
+ 
 ```
+
 <div style="text-align: justify">
  
 Así agregando una condición extra en la que decimos que no tomamos las palabras que inicien con minuscula, nuestros etiquetas tiene menos ruido, y por ende serán mejores para entrenar y aprender a solo **detectar** ingredientes.
  
 </div>
+
 ```python
+
 def _filter(token):
     if len(token) < 2:
         return False
@@ -130,4 +155,5 @@ def _filter(token):
     if token.text[0].islower():
         return False
     return True
+    
 ```

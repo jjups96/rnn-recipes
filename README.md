@@ -237,3 +237,16 @@ Despues de comparar las intrucciones tokenizadas con el vacabulario creado, obte
  'Öl']
  
  ```
+
+## El modelo
+<div align='center'>
+
+<img src = 'https://github.com/jjups96/rnn-recipes/blob/master/german/plots/model.png' width="400" height="600" >
+
+</div>
+
+<div style="text-align: justify">
+ 
+Primero transformamos los parrafos tokenizados y sus respectivas etiquetas, uno por uno a un formato uniforme usando la funcion de pad_sequence, que transforma la informacion a un vector de informacion, esta sera recibida por la capa de embebido. Le sigue una capa de de dropout espacial de dimension 1, lo mismo que el dropout pero toda una caracteristica/mascara. Y despues una capa bidereccional de LSTM's con 64 unidades. Repetimos una capa de dropout y una bidereccional, finalmente una capa de activacion con una sigmoidal.
+
+</div>

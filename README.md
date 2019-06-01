@@ -69,6 +69,28 @@ def _clean(text):
     
 ```
 
+```
+
+['cups','low','sodium','vegetable',
+ 'chicken','stock','cup','dried','brown',
+ 'lentils', 'cup','dried','French',
+ 'green','lentils','stalks','celery',
+ 'chopped','large','carrot','peeled',
+ 'chopped','sprig','fresh','thyme',
+ 'teaspoon','kosher','salt','medium',
+ 'tomato','cored','seeded','diced',
+ 'small','Fuji','apple','cored',
+ 'diced','tablespoon','freshly','squeezed',
+ 'lemon','juice','teaspoons','extra',
+ 'virgin','olive','oil','Freshly',
+ 'ground','black','pepper','taste',
+ 'sheets','wheat','lavash','cut',
+ 'half','crosswise','12-inch','flour',
+ 'tortillas','pound','turkey','breast','thinly',
+ 'sliced','head','Bibb','lettuce']
+ 
+```
+
 <div style="text-align: justify">
  
 Para después tokenizar la lista de ingredientes y después filtrar las palabras que nos interesan, como los números y las stop words.
@@ -89,11 +111,31 @@ def _filter(token):
     return True
     
 ```
+
 <div style="text-align: justify">
  
 Sin embargo, esto no es suficiente para solo etiquetar ingredientes y terminaremos etiquetando el lenguaje de cocina. Por ejemplo, nuestro filtro no hace distinción entre las palabras **pound, turkey, breast, thinly, sliced**, por lo que al momento de etiquetar la receta tomará la sentencia: Top with several **slices** of **turkey**, then some of the **lettuce**. En lugar del deseado: Top with several slices of **turkey**, then some of the **lettuce**
 
+Despues de comparar las intrucciones tokenizadas con el vacabulario creado obtenemos las etiquetas que usaremos.
+
 </div>
+
+```
+
+['apple','carrot',
+ 'celery', 'crosswise', '
+ 'juice','lavash',
+ 'lemon','lentil',
+ 'lentils','lettuce',
+ 'low','medium',
+ 'oil','olive',
+ 'pepper','salt',
+ 'sheet','slice',
+ 'stock','thyme',
+ 'tomato',tortillas',
+ 'turkey'}
+
+```
 
 ### *1 gut gekennzeichnetes und gefiltertes Arrangement.
 
@@ -135,6 +177,22 @@ Y esto no cambia en el listado de ingredientes, por el contrario, se vuelve más
  
 ```
 
+```
+
+['Hackfleisch','Sauerkraut',
+ 'Wurst','Csabai',
+ 'Kolbász','Speck',
+ 'Reis','Zwiebeln',
+ 'Zehe','Knoblauch',
+ 'Becher','Schmand',
+ 'Kümmel','Lorbeerblätter',
+ 'Salz','Pfeffer',
+ 'Eier','Bedarf',
+ 'Paprikapulver',
+ 'Wasser','Öl']
+ 
+ ```
+
 <div style="text-align: justify">
  
 Así agregando una condición extra en la que decimos que no tomamos las palabras que inicien con minuscula, nuestros etiquetas tiene menos ruido, y por ende serán mejores para entrenar y aprender a solo **detectar** ingredientes.
@@ -157,3 +215,25 @@ def _filter(token):
     return True
     
 ```
+
+<div style="text-align: justify">
+ 
+Despues de comparar las intrucciones tokenizadas con el vacabulario creado, obtenemos las etiquetas que usaremos. Podemos observar que la cantidad de palabras desechadas es menor cuando lo hacemos con las instrucciones en aleman, pues el filtro inicial es mejor.
+
+</div>
+
+```
+
+['Becher','Eier',
+ 'Hackfleisch','Knoblauch',
+ 'Kolbász','Kümmel',
+ 'Lorbeerblättern',
+ 'Paprikapulver',
+ 'Pfeffer','Reis',
+ 'Salz','Sauerkraut',
+ 'Schmand','Speck',
+ 'Wasser','Wurst',
+ 'Zwiebel',
+ 'Öl']
+ 
+ ```

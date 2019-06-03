@@ -239,14 +239,36 @@ Despues de comparar las intrucciones tokenizadas con el vacabulario creado, obte
  ```
 
 ## El modelo
-<div align='center'>
-
-<img src = 'https://github.com/jjups96/rnn-recipes/blob/master/german/plots/model.png' width="400" height="600" >
-
-</div>
 
 <div style="text-align: justify">
  
 Primero transformamos los parrafos tokenizados y sus respectivas etiquetas, uno por uno a un formato uniforme usando la funcion de pad_sequence, que transforma la informacion a un vector de informacion, esta sera recibida por la capa de embebido. Le sigue una capa de de dropout espacial de dimension 1, lo mismo que el dropout pero toda una caracteristica/mascara. Y despues una capa bidereccional de LSTM's con 64 unidades. Repetimos una capa de dropout y una bidereccional, finalmente una capa de activacion con una sigmoidal.
 
 </div>
+
+<div align='center'>
+
+<img src = 'https://github.com/jjups96/rnn-recipes/blob/master/german/plots/model.png' width="400" height="600" >
+
+</div>
+
+## Resultados
+
+
+<div style="text-align: justify">
+ 
+Lo que se buscaba hacer en este proyecto era etiquetar los ingredientes en recetas sin tener datos para entrenar explícitos, lo cual a mi parecer se cumple. Por ejemplo en la siguiente receta podemos observar que efectivamente etiqueta todos los ingredientes de la receta, sin embargo de momento no hace distinción entre cáscara(peel), naranja(orange) y cáscara de naranja(orange peel); aunque visualmente aparenta que si. Además, podemos observar que detecta palabras que comúnmente se asocian o acompañan a ingredientes como las temperaturas. Con los datos en alemán esto no pasa.
+
+Using electric mixer, beat **butter** until smooth. Beat in sugar. Gradually beat in **brandy**. (Can be prepared 1 week ahead. Cover and refrigerate. Bring to **room** **temperature** before **serving**.) Mix **currants**, **candied** **cherries**, **prunes**, **orange** **peel**, **cinnamon**, **ginger**, **nutmeg** and **salt** in **large** bowl. Pour **rum** over and stir to blend. Let stand 30 minutes. Mix **breadcrumbs**, **sugar** and **flour** in **medium** bowl. Add to **dried** **fruit** mixture and stir to blend. Cover and let stand at **room** temperature overnight. Generously **butter** 2-quart **pudding** **mold** with **lid**. Mix **almonds** and **baking** **powder** in **medium** bowl. Whisk **melted** **butter** **eggs**, **milk**, **vanilla** **extract** and **almond** **extract** in **large** bowl. Stir in **almond** mixture. Stir **butter** mixture into **dried** **fruit** mixture. Spoon batter into prepared **pudding** **mold**. Smooth top. Cover **pudding** **mold** with **lid**. Place **pudding** **mold** on **rack** in **large** pot. Add enough **boiling** **water** to pot to come halfway up sides of **mold**. Cover pot and steam **pudding** over **medium**-**low** heat until tester inserted into center comes out clean, adding more **boiling** **water** to pot if necessary, about 2 hours. Transfer **mold** to **rack** and cool 5 minutes. Turn out **pudding**. (Can be made 1 week ahead. Cool. Wrap tightly in plastic and refrigerate. To reheat **pudding**, unwrap and return to buttered **mold**; cover **mold**. Place **mold** on **rack** in **large** pot. Add enough **hot** **water** to pot to come halfway up sides of **mold**. Cover pot and steam **pudding** over **medium**-**low** heat until heated through, about 45 minutes. Transfer **mold** to **rack**. Let stand 5 minutes. Turn out **pudding**.) Transfer **pudding** to platter. Serve warm with **brandy** **butter**.
+ 
+</div>
+
+## Trabajo futuro
+
+<div style="text-align: justify">
+ 
+Para el trabajo futuro, me centraré en crear un mejor filtro, lo cual permitirá obtener solo ingredientes e identificar ingredientes compuestos. En cuanto a la tecnología, usar LSTMs, es tan del 2015, por lo que provar un enfoque basado en CNNs o mecanismos de atención parecen una buena opción.
+
+</div>
+
+
